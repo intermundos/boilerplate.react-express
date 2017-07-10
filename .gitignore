@@ -107,3 +107,7 @@ fabric.properties
 
 
 /dist
+/configuration/app
+
+# VS Code 
+.vscode

@@ -5,13 +5,13 @@ import { BrowserRouter as Router }  from 'react-router-dom'
 import configureStore               from './app-logic/store/store'
 const store = configureStore()
 
-import Root from './containers/App'
+import App from './containers/App'
 
 
 ReactDOM.render(
     <Provider store={ store }>
         <Router history={ history }>
-            <Root />
+            <App />
         </Router>
     </Provider>,
     document.getElementById('react'))

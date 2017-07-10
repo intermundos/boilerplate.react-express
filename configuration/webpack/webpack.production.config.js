@@ -8,7 +8,7 @@ const nodeModules = "node_modules";
 const excludeNodeModules = /node_modules/;
 
 
-// Babel config
+// Configs
 const babelConfig = require('../babel/babel.dev.config');
 
 // Plugins
