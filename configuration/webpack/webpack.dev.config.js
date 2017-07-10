@@ -1,5 +1,6 @@
 import webpack from 'webpack'
 import { join, resolve } from 'path'
+
 // Plugins
 import HtmlWebpackPlugin from 'html-webpack-plugin'
 import ExtendedDefinePlugin from 'extended-define-webpack-plugin'
@@ -29,7 +30,7 @@ export default {
 		publicPath: ''
 	},
 	resolve: {
-		modules: [ includeNode, srcPath ]
+		modules: [includeNode, srcPath]
 	},
 	module: {
 		rules: [
@@ -42,7 +43,7 @@ export default {
 			},
 			{
 				test: /\.s?[ac]ss$/,
-				exclude: [ excludeNode, cssLibs ],
+				exclude: [excludeNode, cssLibs],
 				use: [
 					{ loader: 'style-loader' },
 					{
@@ -72,9 +73,8 @@ export default {
 			},
 			{
 				test: /\.s?[ac]ss$/,
-				include: [ includeNode, cssLibs ],
-				use: [
-					{
+				include: [includeNode, cssLibs],
+				use: [{
 						loader: 'style-loader'
 					},
 					{

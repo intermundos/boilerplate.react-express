@@ -1,0 +1,33 @@
+{
+    "root": true,
+
+    "env": {
+        "es6": true,
+        "node": true
+    },
+
+    "globals": {
+        "document": false,
+        "navigator": false,
+        "window": false
+    },
+
+    "extends": ["prettier", "eslint:recommended"],
+    "plugins": ["import", "react"],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true,
+            "modules": true,
+            "experimentalObjectRestSpread": true
+        }
+    },
+    "rules": {
+        "semi": 0,
+        "react/jsx-uses-react": 2,
+        "react/jsx-uses-vars": 2,
+        "space-in-parens": [0, "never"],
+        "eol-last": ["off", "never"]
+    }
+}
