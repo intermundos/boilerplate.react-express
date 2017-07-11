@@ -28,6 +28,6 @@
         "react/jsx-uses-react": 2,
         "react/jsx-uses-vars": 2,
         "space-in-parens": [0, "never"],
-        "eol-last": ["off", "never"]
+        "eol-last": [0, "never"]
     }
 }
