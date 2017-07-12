@@ -8,12 +8,12 @@ import App from './containers/app'
 const store = configureStore()
 
 ReactDOM.render(
-    <Provider store={store}>
-        <Router history={history}>
-            <App />
-        </Router>
-    </Provider>,
-    document.getElementById('react')
+	<Provider store={store}>
+		<Router history={history}>
+			<App />
+		</Router>
+	</Provider>,
+	document.getElementById('react')
 )
 
 if (module.hot) module.hot.accept()
