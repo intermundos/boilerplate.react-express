@@ -1,5 +1,5 @@
 import webpack from 'webpack'
-import { join, resolve } from 'path'
+import { resolve } from 'path'
 
 // Plugins
 import HtmlWebpackPlugin from 'html-webpack-plugin'
@@ -12,25 +12,28 @@ const includeNode = resolve('node_modules')
 const cssLibs = resolve('client/static/styles/styles')
 
 // Configs
-import babelConfig from '../babel/babel.dev.config'
-import appConfig from '../app/app.config'
-
-// const HtmlWebpackPlugin = require('html-webpack-plugin')
-// const ExtendedDefinePlugin = require('extended-define-webpack-plugin')
+import babelCONF from '../babel/babel.dev.config'
+import appCONF from '../app/app.config'
 
 export default {
 	devtool: 'eval',
-	entry: [
-		`webpack-hot-middleware/client?path=/__webpack_hmr&timeout=100`,
-		'./client/index'
-	],
+	entry: [`webpack-hot-middleware/client?path=/__webpack_hmr&timeout=100`, './client/index'],
 	output: {
 		path: '/',
 		filename: 'bundle.js',
 		publicPath: ''
 	},
 	resolve: {
-		modules: [includeNode, srcPath]
+		modules: [includeNode, srcPath],
+		alias: {
+			Logger: resolve('client/utils/logger.js'),
+			Components: resolve('client/components/'),
+			Containers: resolve('client/containers/'),
+			Logic: resolve('client/app-logic/'),
+			Configuration: resolve('configuration/'),
+			Server: resolve('server/'),
+			Static: resolve('client/static/')
+		}
 	},
 	module: {
 		rules: [
@@ -39,7 +42,7 @@ export default {
 				exclude: excludeNode,
 				include: srcPath,
 				loader: 'babel-loader',
-				query: babelConfig
+				query: babelCONF
 			},
 			{
 				test: /\.s?[ac]ss$/,
@@ -64,9 +67,7 @@ export default {
 						options: {
 							sourceMap: true,
 							data: '@import "../configuration/sass/sassutils";',
-							includePaths: [
-								srcPath
-							]
+							includePaths: [srcPath]
 						}
 					}
 				]
@@ -74,7 +75,8 @@ export default {
 			{
 				test: /\.s?[ac]ss$/,
 				include: [includeNode, cssLibs],
-				use: [{
+				use: [
+					{
 						loader: 'style-loader'
 					},
 					{
@@ -99,7 +101,10 @@ export default {
 			template: 'server/index.html'
 		}),
 		new ExtendedDefinePlugin({
-			APP_CONFIG: appConfig
+			APP_CONFIG: appCONF
+		}),
+		new webpack.ProvidePlugin({
+			Logger: 'Logger'
 		})
 	]
 }

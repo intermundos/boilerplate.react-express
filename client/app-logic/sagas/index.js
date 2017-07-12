@@ -1,5 +1,5 @@
 import  { fork }   from      'redux-saga/effects'
-import  test   from      './testSaga'
+import  test   from      './test'
 
 export default function* rootSaga() {
   yield [

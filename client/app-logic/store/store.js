@@ -1,33 +1,39 @@
-import { createStore, compose, applyMiddleware }    from 'redux'
+import { createStore, compose, applyMiddleware } from 'redux'
 import { createLogger } from 'redux-logger'
 import createSagaMiddleware from 'redux-saga'
-import rootDuck from '../reducers/index'
+import rootReducer from '../reducers/index'
 import rootSaga from '../sagas/index'
 
 const configureStore = () => {
+	const saga = createSagaMiddleware()
+	const logger = createLogger()
+	const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose
+	let middleware = null
 
-  const logger = createLogger()
-  const saga = createSagaMiddleware()
-  const composeEnchancers = window.__REDUX_DEVTOOLS_EXTENSION__COMPOSE__ || compose
+	if (process.env.NODE_ENV !== 'production') {
+		middleware = applyMiddleware(logger, saga)
+	} else {
+		middleware = applyMiddleware(saga)
+	}
 
-  let middleware = applyMiddleware(logger, saga)
+	const addReduxDevTools = () => {
+		if (process.env.NODE_ENV !== 'production') {
+			return window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+		}
+	}
 
-  const store = createStore(
-    rootDuck,
-    process.env.NODE_ENV !== window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
-    composeEnchancers(middleware)
-  )
+	const store = createStore(rootReducer, addReduxDevTools(), composeEnhancers(middleware))
 
-  saga.run(rootSaga)
+	saga.run(rootSaga)
 
-  if (module.hot) {
-    module.hot.accept('../reducers', () => {
-      const newReducer = require('../reducers/index').default
-      store.replaceReducer(newReducer)
-    })
-  }
+	if (module.hot) {
+		module.hot.accept('../reducers', () => {
+			const newReducer = require('../reducers/index').default
+			store.replaceReducer(newReducer)
+		})
+	}
 
-  return store
+	return store
 }
 
 export default configureStore

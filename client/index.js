@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom'
 import { Provider } from 'react-redux'
 import { BrowserRouter as Router } from 'react-router-dom'
 import configureStore from './app-logic/store/store'
-import App from './containers/App'
+import App from './containers/app'
 
 const store = configureStore()
 

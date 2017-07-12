@@ -27,7 +27,8 @@
         "semi": 0,
         "react/jsx-uses-react": 2,
         "react/jsx-uses-vars": 2,
-        "space-in-parens": [0, "never"],
-        "eol-last": [0, "never"]
+        "space-in-parens": 0,
+        "eol-last": 0,
+        "no-undef": 1
     }
 }
