@@ -1,7 +1,7 @@
 {
   "name": "reactexpress",
   "scripts": {
-    "server": "cross-env NODE_ENV=development nodemon --watch server --exec babel-node --presets latest,stage-0 -- server/index.js",
+    "start": "cross-env NODE_ENV=development nodemon --watch server --exec babel-node --presets latest,stage-0 -- server/index.js",
     "prebuild": "del dist",
     "build": "cross-env NODE_ENV=production webpack --config configuration/webpack/webpack.production.config.js --progress --bail"
   },
