@@ -12,8 +12,8 @@ const includeNode = resolve('node_modules')
 const cssLibs = resolve('client/static/styles/styles')
 
 // Configs
-import babelCONF from '../babel/babel.dev.config'
-import appCONF from '../app/app.config'
+import babel_config from '../babel/babel.dev.config'
+import app_config from '../app/app.config'
 
 export default {
 	devtool: 'eval',
@@ -25,6 +25,7 @@ export default {
 	},
 	resolve: {
 		modules: [includeNode, srcPath],
+		extensions: ['.js', '.json', '.scss'],
 		alias: {
 			Logger: resolve('client/utils/logger.js'),
 			Components: resolve('client/components/'),
@@ -42,7 +43,7 @@ export default {
 				exclude: excludeNode,
 				include: srcPath,
 				loader: 'babel-loader',
-				query: babelCONF
+				query: babel_config
 			},
 			{
 				test: /\.s?[ac]ss$/,
@@ -101,7 +102,7 @@ export default {
 			template: 'server/index.html'
 		}),
 		new ExtendedDefinePlugin({
-			APP_CONFIG: appCONF
+			APP_CONFIG: app_config
 		}),
 		new webpack.ProvidePlugin({
 			Logger: 'Logger'
